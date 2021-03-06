@@ -404,6 +404,9 @@ Route::get('getDriverFromTruck', 'Admin\commonController@getDriverFromTruck');
 
 Route::post('wheel-greasing-store', 'Admin\wheelGreasingController@store');
 
+Route::get('wheel-greasing-show', 'Admin\wheelGreasingController@show');
+
+
 
 
 

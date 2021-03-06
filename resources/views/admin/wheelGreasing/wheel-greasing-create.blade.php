@@ -101,8 +101,8 @@
                             <center>                             
                                 
                             <button type="submit" class="btn btn-satgreen">- SAVE -</button> &nbsp;&nbsp;
-                            <a href="{{ url('/purchase-entry-create') }}" class='btn btn-red'>- RESET -</a> &nbsp;&nbsp;
-                            <a href="{{ url('/tyre-mapping-datatables') }}" class="btn btn-teal">- REPORTS -</a>&nbsp;&nbsp;                          
+                            <a href="{{ url('/wheel-greasing-create') }}" class='btn btn-red'>- RESET -</a> &nbsp;&nbsp;
+                            <a href="{{ url('/wheel-greasing-show') }}" class="btn btn-teal">- REPORTS -</a>&nbsp;&nbsp;                          
                             </center>
                             </div>
 

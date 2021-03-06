@@ -52,9 +52,12 @@ class wheelGreasingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $wheel_greasings = DB::table('wheel_greasings')
+        ->orderBy('id', 'DESC')
+        ->get();
+        return view('admin.wheelGreasing.wheel-greasing-show', ['wheel_greasings'=>$wheel_greasings]);
     }
 
     /**
