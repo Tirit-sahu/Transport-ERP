@@ -8,7 +8,7 @@
 @section('unit_messure',$item->unit_messure)
 @section('item_rate',$item->item_rate)
 @section('hsncode',$item->hsncode)
-
+@section('item_type',$item->item_type)
 
 @section('button','Update')
 

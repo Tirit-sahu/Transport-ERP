@@ -38,10 +38,8 @@
                      $route = "'$row->route'";
                      ?>
                      <div class="col-md-1" style="cursor: pointer;" onclick="passwordModalMethod({{$id.','.$menu.', '.$route}});">
-                        <div>
-                           <center> <img src="{{ asset('storage/app/public/icon/'.$row->image)}}" alt="{{ $row->menu }}" class="img-thumbnail"></center>
+                           <img src="{{ asset('storage/app/public/icon/'.$row->image)}}" alt="{{ $row->menu }}" class="img-thumbnail">
                            <h5><b> {{ $row->menu }} </b></h5>
-                        </div>
                      </div>
                      @endforeach
                       

@@ -410,7 +410,7 @@
         url: "{{ url('get-items') }}?godownId="+godownId,
         type: 'get',
         success: function(response) {
-        // console.log(response);
+        console.log(response);
         $("#item"+index).html(response);
         $("#item"+index).val(val);
         $("#item"+index).trigger("chosen:updated");

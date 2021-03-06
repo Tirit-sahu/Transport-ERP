@@ -100,6 +100,9 @@ Route::get('/items-store', 'Admin\LoadingEntryController@storeItems');
 
 Route::get('/get-items', 'Admin\LoadingEntryController@getItems');
 
+Route::get('/get-items-for-loading', 'Admin\LoadingEntryController@getItemsForLoading');
+
+
 Route::get('/hemal-store', 'Admin\LoadingEntryController@storeHemal');
 
 Route::get('/get-hemal', 'Admin\LoadingEntryController@getHemal');
@@ -391,6 +394,24 @@ Route::get('battery-opening-balance-datatables', 'Admin\BatteryOpeningBalanceCon
 Route::get('battery-opening-balance-edit/{id}', 'Admin\BatteryOpeningBalanceController@edit');
 
 Route::post('battery-opening-balance-update/{id}', 'Admin\BatteryOpeningBalanceController@update');
+
+
+// ========== WHEEL GREASING ==========
+
+Route::get('wheel-greasing-create', 'Admin\wheelGreasingController@create');
+
+Route::get('getDriverFromTruck', 'Admin\commonController@getDriverFromTruck');
+
+Route::post('wheel-greasing-store', 'Admin\wheelGreasingController@store');
+
+
+
+
+
+
+
+
+
 
 
 // Stock Report

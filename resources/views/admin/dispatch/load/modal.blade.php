@@ -530,15 +530,14 @@ function item_store(){
 
 function getItems(){
 	 $.ajax({
-      url: "{{ url('get-items') }}",
+      url: "{{ url('get-items-for-loading') }}",
       type: 'get',
       success: function(response) {
 		  console.log(response);
       	$("#item_master").html(response);
 		$("#item_master").val("@yield('item_master')");
       	$('#item_master').trigger("chosen:updated");
-      }
-      
+      }      
     });
 }
 getItems();

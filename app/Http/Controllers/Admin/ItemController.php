@@ -41,12 +41,12 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'item_category'=>'required',
             'item_name'=>'required',
             'unit_messure'=>'required',
-            'item_rate'=>'required'
+            'item_rate'=>'required',
+            'item_type'=>'required'
         ]);
 
         $item=new Item();
@@ -56,10 +56,10 @@ class ItemController extends Controller
         $item->unit_messure=$request->unit_messure;
         $item->item_rate=$request->item_rate;
         $item->hsncode=$request->hsncode;
+        $item->item_type=$request->item_type;
         // $item->createdby=auth()->user()->id;
         // $item->ipaddress=$request->getClientIp();
         $item->save();
-
         return redirect()->back()->with('message','Item Add Successfully.');
     }
 
@@ -105,6 +105,7 @@ class ItemController extends Controller
         $item->unit_messure=$request->unit_messure;
         $item->item_rate=$request->item_rate;
         $item->hsncode=$request->hsncode;
+        $item->item_type=$request->item_type;
         // $item->ipaddress=$request->getClientIp();
         // $item->createdby=auth()->user()->id;
         

@@ -133,9 +133,8 @@ use Illuminate\Http\Request;
 										<div class="col-sm-2">
 											<div class="form-group">
 												<label for="textfield" class="control-label"><strong>Item Master <span class="err" style="color:#F00;">*</span> </strong> <img src="{{url('/')}}/admin/add.png" id="shortcut_truck" data-toggle="modal" data-target="#Item-master-modal"></label>
-												<select name="item_master" id="item_master" class='chosen-select form-control'>
-                                                
-											</select>
+												<select name="item_master" id="item_master" class='chosen-select form-control'>                                                
+												</select>
 											<script>document.getElementById("item_master").value = "@yield('item_master')"; </script>
 											</div>
                                         </div>

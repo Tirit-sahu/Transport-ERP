@@ -604,13 +604,28 @@ class LoadingEntryController extends Controller
     }
 
     public function getItems(Request $request, commonController $c){
-        $items = DB::select("SELECT purchase_entries.godown AS godown, purchase_entry_details.item AS item FROM purchase_entries LEFT JOIN purchase_entry_details ON purchase_entries.id = purchase_entry_details.purchase_entry_id WHERE purchase_entries.godown = 1");
+        $items = DB::select("SELECT purchase_entries.godown AS godown, purchase_entry_details.item AS item FROM purchase_entries LEFT JOIN purchase_entry_details ON purchase_entries.id = purchase_entry_details.purchase_entry_id WHERE purchase_entries.godown = $request->godownId");
 
         $select_con='';
         $select_con="<option value=''>Select Item </option>";
         foreach ($items as $row) {
             $itemName = $c->getValue('items','item_name','id',$row->item);
             $select_con.="<option value='$row->item'>$itemName</option>";
+        }
+        return $select_con;
+    }
+
+
+    public function getItemsForLoading()
+    {
+        $items = DB::table('items')
+        ->where('item_type', 'Loading')
+        ->get();
+
+        $select_con='';
+        $select_con="<option value=''>Select Item </option>";
+        foreach ($items as $row) {
+            $select_con.="<option value='$row->id'>$row->item_name</option>";
         }
         return $select_con;
     }

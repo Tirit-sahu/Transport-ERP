@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 	<th>Unit Messure</th>
 	<th>Item Rate</th>	
     <th>HSN Code</th>
+	<th>Type</th>
     <th>Action </th>
  
 
@@ -40,7 +41,7 @@ use Illuminate\Http\Request;
     <td>{{ commonController::getValueStatic('units','name','id',$item->unit_messure) }}</td>
     <td>{{$item->item_rate}}</td>
     <td>{{$item->hsncode}}</td>
-
+	<td>{{$item->item_type}}</td>
        
 	<td>
 		

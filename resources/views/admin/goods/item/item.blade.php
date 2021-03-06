@@ -35,8 +35,8 @@
 											<div class="form-group">
 												<label for="textfield" class="control-label"><strong>	Item Category  </strong>
 												</label>
-												<select name="item_category" id="item_category" class='chosen-select form-control' >                                            
-                                               	<option value=""> - Select - </option>
+												<select name="item_category" id="item_category" class='chosen-select form-control' required>                                            
+                                               	<option value=""> </option>
                                                	@foreach($cates as $cate)
 			                                 	 <option value="{{$cate->id}}">{{$cate->item_category_name}}</option>
                                       			@endforeach
@@ -69,8 +69,7 @@
 													<strong>Unit Messure </strong>
 												</label>
 													<select name="unit_messure" id="unit_messure" class='chosen-select form-control' >
-
-													<option value=""> - Select - </option>
+													<option value=""> </option>
 													@foreach($units as $unit)
 													<option value="{{$unit->id}}">{{$unit->name}}</option>
 													@endforeach
@@ -98,7 +97,25 @@
 												<input type="text" name="hsncode" id="hsncode" value="@yield('hsncode')" autocomplete="off"
                                                 placeholder="HSN Code" class="form-control">
 											</div>
-										</div>   
+										</div>
+										
+										
+										<div class="col-sm-4">
+											<div class="form-group">
+												<?php 
+													$typeArray = ['Loading', 'Inventory'];
+												?>
+												<label for="textfield" class="control-label"><strong> Type</strong>
+												</label>
+												<select name="item_type" id="item_type" class="form-control" required>
+													<option value=""></option>
+													@foreach($typeArray as $ta)
+													<option value="{{ $ta }}">{{ $ta }}</option>
+													@endforeach
+												</select>
+												<script>document.getElementById("item_type").value = "@yield('item_type')"; </script>
+											</div>
+										</div> 
 
 										
 

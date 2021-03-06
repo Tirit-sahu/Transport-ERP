@@ -192,6 +192,11 @@ public function databaseBackup(Request $request)
 
 
     }
+
+    public function getDriverFromTruck(Request $request)
+    {
+        return DB::table('driver_mappings')->where('vehicle', $request->truckId)->value('driver');
+    }
     
 
 
