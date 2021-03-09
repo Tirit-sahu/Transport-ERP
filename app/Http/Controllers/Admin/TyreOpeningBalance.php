@@ -71,7 +71,7 @@ class TyreOpeningBalance extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, commonController $c)
     {
         $truck_number = $request->truck_id;
         $tyre_type = $request->tyre_type;
@@ -82,11 +82,12 @@ class TyreOpeningBalance extends Controller
 
         $table_body = '';
         foreach($tyre_opening_balances as $row){
+            $truckNumber = $c->getValueStatic('trucks','truck_number','id',$row->truck_number);
             $image1url = asset("storage/app/public/TyreImages/".$row->image1);
             $image2url = asset("storage/app/public/TyreImages/".$row->image2);
             $table_body .= '            
             <tr>
-                <td>'.$row->truck_number.'</td>
+                <td>'.$truckNumber.'</td>
                 <td>'.$row->tyre_type.'</td>
                 <td>'.$row->serial_number.'</td>
                 <td>'.$row->name.'</td>
@@ -131,6 +132,67 @@ class TyreOpeningBalance extends Controller
         ';
         return $table;
         // return view('admin.tyre_mapping.tyre-opening-record-datatables', ['tyre_opening_balances'=>$tyre_opening_balances]);
+    }
+
+
+    public function showAllTyreFromTruck(Request $request, commonController $c)
+    {
+        $truck_id = $request->truck_id;
+        $tyre_opening_balances = DB::table('tyre_opening_balances')
+        ->where(['truck_number'=>$truck_id])
+        ->get();
+
+        $table_body = '';
+        foreach($tyre_opening_balances as $row){
+            $truckNumber = $c->getValueStatic('trucks','truck_number','id',$row->truck_number);
+            $image1url = asset("storage/app/public/TyreImages/".$row->image1);
+            $image2url = asset("storage/app/public/TyreImages/".$row->image2);
+            $table_body .= '            
+            <tr>
+                <td>'.$truckNumber.'</td>
+                <td>'.$row->tyre_type.'</td>
+                <td>'.$row->serial_number.'</td>
+                <td>'.$row->name.'</td>
+                <td>'.$row->meter_reading.'</td>
+                <td>'.$row->upload_date.'</td>
+                <td>
+                    <a href="'.$image1url.'" target="_blank">
+                    <img style="width: 60px;height:60px;" src="'.$image1url.'" alt="Image not found">
+                    </a>
+                </td>
+                <td>
+                    <a href="'.$image2url.'" target="_blank">
+                    <img style="width: 60px;height:60px;" src="'.$image2url.'" alt="Image not found">
+                    </a>
+                </td>
+                <td>
+                    <a title="Delete" class="label label-danger" onclick="deleteTyreOpening('.$row->id.')"><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete</a>
+                </td>
+            </tr>
+            ';
+        }
+
+        $table = '
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Truck No.</th>
+                <th>Tyre Type</th>
+                <th>Serial No.</th>
+                <th>Tyre Name</th>
+                <th>Meter Reading</th>
+                <th>Upload Date</th>
+                <th>Image 1</th>
+                <th>Image 2</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>     
+                '.$table_body.'
+            </tbody>
+        </table>
+        ';
+        return $table;
     }
 
     /**

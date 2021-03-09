@@ -4,26 +4,26 @@
 <?php 
 $truckNumber = 0;
 $driverName = 0;
+$oilType2 = '';
 $place = '';
 $meterReading = '';
 $date = '';
-$nextGreasingKM = '';
-$extraMaterial = '';
-$narration = '';
-$url = url('wheel-greasing-store');
+$liter = '';
+$amount = '';
+$url = url('oil-refilling-store');
 $button = '- SAVE -';
 $title = 'Create';
 
-if (isset($wheel_greasing)) {
-    $truckNumber = $wheel_greasing->truckNumber;
-    $driverName = $wheel_greasing->driverName;
-    $place = $wheel_greasing->place;
-    $meterReading = $wheel_greasing->meterReading;
-    $date = $wheel_greasing->date;
-    $nextGreasingKM = $wheel_greasing->nextGreasingKM;
-    $extraMaterial = $wheel_greasing->extraMaterial;
-    $narration = $wheel_greasing->narration;
-    $url = url('wheel-greasing-update', array($wheel_greasing->id));
+if (isset($oil_refillings)) {
+    $truckNumber = $oil_refillings->truckNumber;
+    $driverName = $oil_refillings->driverName;
+    $oilType2 = $oil_refillings->oilType;
+    $place = $oil_refillings->place;
+    $meterReading = $oil_refillings->meterReading;
+    $date = $oil_refillings->date;
+    $liter = $oil_refillings->liter;
+    $amount = $oil_refillings->amount;
+    $url = url('oil-refilling-update', array($oil_refillings->id));
     $button = '- UPDATE -';
     $title = 'Edit';
 }
@@ -46,7 +46,7 @@ if (isset($wheel_greasing)) {
                 <div class="col-sm-12">
 						<div class="box box-bordered box-color satblue">
 							<div class="box-title">
-								<h3><i class="fa fa-bars"></i>Wheel Greasing {{ $title }}</h3>
+								<h3><i class="fa fa-bars"></i>Oil Refillings {{ $title }}</h3>
 							</div>
 							<div class="box-content nopadding">
 								<div class="tab-content padding tab-content-inline tab-content-bottom">
@@ -70,6 +70,21 @@ if (isset($wheel_greasing)) {
                                 <label for="driverName" class="control-label"><strong>Driver Name </strong> </label>
                                 <select name="driverName" id="driverName" class='select2Jquery' style="width: 100%;" required>                                                
                                 </select>                               
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <?php 
+                                $oilType = ['Crown', 'Gear Box', 'Engine']     
+                                ?>
+                                <div class="form-group">
+                                <label for="oilType" class="control-label"><strong>Oil type </strong> </label>
+                                <select name="oilType" id="oilType" class='select2Jquery' style="width: 100%;" required> 
+                                    <option value=""></option>
+                                    @foreach($oilType as $ot)
+                                        <option @if($oilType2 == $ot) selected @endif value="{{ $ot }}">{{ $ot }}</option>
+                                    @endforeach
+                                </select>                                                              
                                 </div>
                             </div>
 
@@ -100,37 +115,29 @@ if (isset($wheel_greasing)) {
 
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label for="nextGreasingKM" class="control-label"><strong>Next Greasing KM </strong> </label>
-                                    <input type="text" name="nextGreasingKM" id="nextGreasingKM" 
-                                    placeholder="" value="{{ $nextGreasingKM }}" class="form-control">
+                                    <label for="liter" class="control-label"><strong>Liter </strong> </label>
+                                    <input type="text" name="liter" id="liter" 
+                                    placeholder="" value="{{ $liter }}" class="form-control">
                                     </div>
                             </div>
 
                             <div class="col-sm-2">
                                 <div class="form-group">
-                                    <label for="extraMaterial" class="control-label"><strong>Extra Material</strong> </label>
-                                    <input type="text" name="extraMaterial" id="extraMaterial" 
-                                    placeholder="" value="{{ $extraMaterial }}" class="form-control">
+                                    <label for="amount" class="control-label"><strong>Amount</strong> </label>
+                                    <input type="text" name="amount" id="amount" 
+                                    placeholder="" value="{{ $amount }}" class="form-control">
                                     </div>
                             </div>
 
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label for="narration" class="control-label"><strong>Narration</strong> </label>
-                                    <input type="text" name="narration" id="narration" 
-                                    placeholder="" value="{{ $narration }}" class="form-control">
-                                </div>
-                            </div>
-
-
+                            
 
                             <div class="col-md-12">                    
 
                             <center>                             
                                 
                             <button type="submit" class="btn btn-satgreen">{{ $button }}</button> &nbsp;&nbsp;
-                            <a href="{{ url('/wheel-greasing-create') }}" class='btn btn-red'>- RESET -</a> &nbsp;&nbsp;
-                            <a href="{{ url('/wheel-greasing-show') }}" class="btn btn-teal">- REPORTS -</a>&nbsp;&nbsp;                          
+                            <a href="{{ url('/oil-refilling-create') }}" class='btn btn-red'>- RESET -</a> &nbsp;&nbsp;
+                            <a href="{{ url('/oil-refilling-show') }}" class="btn btn-teal">- REPORTS -</a>&nbsp;&nbsp;                          
                             </center>
                             </div>
 

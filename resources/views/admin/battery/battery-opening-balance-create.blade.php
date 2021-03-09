@@ -62,6 +62,12 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-2">
+                              <div class="form-group"><br>
+                              <button type="button" onclick="showAllBatteryFromTruck()" title="Show all tyre from selected turck number" class="btn btn-primary" style="margin-top: 5px;"><i class="fa fa-list-ol" aria-hidden="true"></i> Show All</button>                            
+                              </div>
+                          </div>
+
 <div class="col-sm-12">                         
 <!-- tire images -->
 <center>
@@ -712,6 +718,27 @@
     </div>
   </div>
 
+
+
+<div class="modal fade" id="ShowAllBatteryOpeningModal" role="dialog">
+   <div class="modal-dialog modal-lg">   
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header" id="tireOpeningHeader">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title"><center>Report:- <span id="M2Title"></span></center></h4>
+       </div>
+       <div class="modal-body">         
+         <input type="hidden" id="M2truck_number">
+         <div id="ShowAllBatteryOpeingTable"></div>           
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>     
+   </div>
+</div>
+
 <!-- ============= End Modal ============= -->
 
 <script>
@@ -749,6 +776,26 @@
 
 
 <script>
+   function showAllBatteryFromTruck(){
+      var truck_id = $("#truck_number").val();
+      var truck_number = $('#truck_number').find(":selected").text();
+      $("#ShowAllBatteryOpeningModal").modal('show');
+      $("#M2truck_number").val(truck_id);
+      $("#M2Title").html('Truck Number: '+truck_number);
+      $.ajax({
+            type:'GET',
+            url:'{{ url("show-all-battery-opening-record-datatables") }}?truck_id='+truck_id,
+            success:function(res){
+               // console.log(res);
+               $("#ShowAllBatteryOpeingTable").html(res);
+            }
+      });
+
+   }
+</script>
+
+
+<script>
       function tireOpeningModal(Mbattery_name){
         var truck_id = $("#truck_number").val();
         var truck_number = $('#truck_number').find(":selected").text();
@@ -767,6 +814,7 @@
             url:'{{ url("commonDeleteRecord") }}?table=battery_opening_balances&key=id&value='+id,
             success:function(res){
                showBatteryOpeingRecord();
+               showAllBatteryFromTruck();
             }
          });
          }

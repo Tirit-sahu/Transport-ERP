@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Session;
 use Redirect;
 
-
-class wheelGreasingController extends Controller
+class OilRefillingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class wheelGreasingController extends Controller
      */
     public function create()
     {
-        return view('admin.wheelGreasing.wheel-greasing-create');
+        return view('admin.oil_refillings.oil-refilling-create');
     }
 
     /**
@@ -38,9 +38,15 @@ class wheelGreasingController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'liter' => 'required|numeric',
+            'amount' => 'required|numeric'
+        ]);
+
         $data = $request->all();
         unset($data['_token']);
-        DB::table('wheel_greasings')
+        $data['date'] = date('Y-m-d', strtotime($request->date));
+        DB::table('oil_refillings')
         ->insert($data);
         $request->session()->flash('message', 'New Record Created Successfully');
         return Redirect::back();
@@ -54,10 +60,8 @@ class wheelGreasingController extends Controller
      */
     public function show()
     {
-        $wheel_greasings = DB::table('wheel_greasings')
-        ->orderBy('id', 'DESC')
-        ->get();
-        return view('admin.wheelGreasing.wheel-greasing-show', ['wheel_greasings'=>$wheel_greasings]);
+        $oil_refillings = DB::table('oil_refillings')->orderBy('id', 'DESC')->get();
+        return view('admin.oil_refillings.oil-refilling-show', ['oil_refillings'=>$oil_refillings]);
     }
 
     /**
@@ -68,8 +72,8 @@ class wheelGreasingController extends Controller
      */
     public function edit($id)
     {
-        $wheel_greasing = DB::table('wheel_greasings')->where('id', $id)->first();
-        return view('admin.wheelGreasing.wheel-greasing-create', ['wheel_greasing'=>$wheel_greasing]);
+        $oil_refillings = DB::table('oil_refillings')->where('id', $id)->first();
+        return view('admin.oil_refillings.oil-refilling-create',['oil_refillings'=>$oil_refillings]);
     }
 
     /**
@@ -81,13 +85,19 @@ class wheelGreasingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'liter' => 'required|numeric',
+            'amount' => 'required|numeric'
+        ]);
+
         $data = $request->all();
         unset($data['_token']);
-        DB::table('wheel_greasings')
+        $data['date'] = date('Y-m-d', strtotime($request->date));
+        DB::table('oil_refillings')
         ->where('id', $id)
         ->update($data);
         $request->session()->flash('message', 'Record Updated Successfully');
-        return Redirect('wheel-greasing-show');
+        return Redirect('oil-refilling-show');
     }
 
     /**

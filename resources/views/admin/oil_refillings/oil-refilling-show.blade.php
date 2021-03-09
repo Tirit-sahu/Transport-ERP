@@ -43,7 +43,7 @@ use Illuminate\Http\Request;
                                 <div class="box box-color box-bordered">
                                 <div class="box-title">
                                 <h3>
-                                    Wheel Greasing Datatable
+                                    Oil Refilling
 								</h3>
 								<a href="{{ url('/wheel-greasing-create') }}" class="btn btn-satgreen pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New </a>
                                 </div>
@@ -55,36 +55,33 @@ use Illuminate\Http\Request;
                                 <th>SNO.</th>
                                 <th>Truck Number</th>
                                 <th>Driver</th>
+                                <th>Oil Type</th>
 								<th>Place</th>
                                 <th>Meter Reading</th>
                                 <th>Date</th>
-								<th>Next Greasing KM</th>
-                                <th>Extra Material</th> 
-                                <th>Narration</th>
+								<th>Liter</th>
+                                <th>Amount</th> 
                                 <th>Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-									@foreach($wheel_greasings as $row)
+									@foreach($oil_refillings as $row)
                                     
                                 <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ commonController::getValueStatic('trucks','truck_number','id',$row->truckNumber) }}</td>
                                 <td>{{ commonController::getValueStatic('drivers','employeeName','id',$row->driverName) }}</td>   
+                                <td>{{ $row->oilType }}</td> 
                                 <td>{{ $row->place }}</td> 
                                 <td>{{ $row->meterReading }}</td>
                                 <td>{{ date('d-m-Y', strtotime($row->date)) }}</td>
-                                <td>{{ $row->nextGreasingKM }}</td>
-                                <td>{{ $row->extraMaterial }}</td>
-                                <td>{{ $row->narration }}</td>
-								  
-                                <td>
-                                
-                                <a href="{{ url('wheel-greasing-edit/'.$row->id) }}" class="btn" rel="tooltip" title="Edit">
+                                <td>{{ $row->liter }}</td>
+                                <td>{{ $row->amount }}</td>								  
+                                <td>                                
+                                <a href="{{ url('oil-refilling-edit/'.$row->id) }}" class="btn" rel="tooltip" title="Edit">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </a>
-                              
-                                <a onclick="return confirm('Are Your Sure ?')" href="{{ url('commonDeleteRecord?table=wheel_greasings&key=id&value='.$row->id) }}" class="btn" rel="tooltip" title="Delete">
+                                </a>                              
+                                <a onclick="return confirm('Are Your Sure ?')" href="{{ url('commonDeleteRecord?table=oil_refillings&key=id&value='.$row->id) }}" class="btn" rel="tooltip" title="Delete">
 									<i class="fa fa-times"></i>
 								</a>
                                 </td>
@@ -98,19 +95,11 @@ use Illuminate\Http\Request;
                                 </div>
                                 <BR/>
                                 </div>
-                                </div>
-                                    
+                                </div>                                    
 
-					</div>
-                    					
-				</div>
-				
-				
-				
+					</div>                    					
+				</div>	
 				
 			</div>
 		</div>
-
 </div>
-
-

@@ -139,6 +139,64 @@ class BatteryOpeningBalanceController extends Controller
 
     }
 
+
+
+    public function showAllBatteryFromTruck(Request $request, commonController $c)
+    {
+        $truck_number = $request->truck_id;
+        $battery_opening_balances = DB::table('battery_opening_balances')
+        ->where(['truck_number'=>$truck_number])
+        ->get();
+        $table_body = '';
+        foreach($battery_opening_balances as $row){
+            $trckNumber = $c->getValue('trucks','truck_number','id',$row->truck_number);
+            $image1url = asset("storage/app/public/BatteryImages/".$row->batteryImage1);
+            $image2url = asset("storage/app/public/BatteryImages/".$row->batteryImage2);
+            $table_body .= '            
+            <tr>
+                <td>'.$trckNumber.'</td>
+                <td>'.$row->batteryName.'</td>
+                <td>'.$row->batterySerialNo.'</td>
+                <td>'.date('d-m-Y', strtotime($row->upload_date)).'</td>
+                <td>
+                    <a href="'.$image1url.'" target="_blank">
+                    <img style="width: 60px;height:60px;" src="'.$image1url.'" alt="Image not found">
+                    </a>
+                </td>
+                <td>
+                    <a href="'.$image2url.'" target="_blank">
+                    <img style="width: 60px;height:60px;" src="'.$image2url.'" alt="Image not found">
+                    </a>
+                </td>
+                <td>
+                    <a title="Delete" class="label label-danger" onclick="deleteBatteryOpening('.$row->id.')"><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete</a>
+                </td>
+            </tr>
+            ';
+        }
+
+        $table = '
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Truck No.</th>
+                <th>Battery Name</th>
+                <th>Serial No.</th>                
+                <th>Image 1</th>
+                <th>Image 2</th>
+                <th>Upload Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>     
+                '.$table_body.'
+            </tbody>
+        </table>
+        ';
+        return $table;
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

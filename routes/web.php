@@ -380,6 +380,8 @@ Route::post('tyre-opening-store', 'Admin\TyreOpeningBalance@store');
 
 Route::get('tyre-opening-record-datatables', 'Admin\TyreOpeningBalance@show');
 
+Route::get('show-all-tyre-opening-record-datatables', 'Admin\TyreOpeningBalance@showAllTyreFromTruck');
+
 Route::get('tyre-opening-edit/{id}', 'Admin\TyreOpeningBalance@edit');
 
 Route::post('tyre-opening-update/{id}', 'Admin\TyreOpeningBalance@update');
@@ -390,6 +392,8 @@ Route::get('battery-opening-balance-create', 'Admin\BatteryOpeningBalanceControl
 Route::post('battery-opening-balance-store', 'Admin\BatteryOpeningBalanceController@store');
 
 Route::get('battery-opening-balance-datatables', 'Admin\BatteryOpeningBalanceController@show');
+
+Route::get('show-all-battery-opening-record-datatables', 'Admin\BatteryOpeningBalanceController@showAllBatteryFromTruck');
 
 Route::get('battery-opening-balance-edit/{id}', 'Admin\BatteryOpeningBalanceController@edit');
 
@@ -406,6 +410,26 @@ Route::post('wheel-greasing-store', 'Admin\wheelGreasingController@store');
 
 Route::get('wheel-greasing-show', 'Admin\wheelGreasingController@show');
 
+Route::get('wheel-greasing-edit/{id}', 'Admin\wheelGreasingController@edit');
+
+Route::post('wheel-greasing-update/{id}', 'Admin\wheelGreasingController@update');
+
+// ========== WHEEL GREASING ==========
+
+Route::get('oil-refilling-create', 'Admin\OilRefillingController@create');
+
+Route::post('oil-refilling-store', 'Admin\OilRefillingController@store');
+
+Route::get('oil-refilling-show', 'Admin\OilRefillingController@show');
+
+Route::get('oil-refilling-edit/{id}', 'Admin\OilRefillingController@edit');
+
+Route::post('oil-refilling-update/{id}', 'Admin\OilRefillingController@update');
+
+
+// ======== GENERATE BILL ========
+
+// Route::get('generate-bill', 'Admin\OilRefillingController@edit');
 
 
 
