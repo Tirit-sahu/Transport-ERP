@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use Redirect;
+use Session;
+use PDF;
+
 
 class generateBILLController extends Controller
 {
@@ -12,9 +17,9 @@ class generateBILLController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function generateBill()
     {
-        //
+        return view('admin.generateBill.generateBILL');
     }
 
     /**

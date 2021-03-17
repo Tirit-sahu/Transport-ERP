@@ -414,7 +414,7 @@ Route::get('wheel-greasing-edit/{id}', 'Admin\wheelGreasingController@edit');
 
 Route::post('wheel-greasing-update/{id}', 'Admin\wheelGreasingController@update');
 
-// ========== WHEEL GREASING ==========
+// ========== OIL REFILLING ==========
 
 Route::get('oil-refilling-create', 'Admin\OilRefillingController@create');
 
@@ -429,11 +429,29 @@ Route::post('oil-refilling-update/{id}', 'Admin\OilRefillingController@update');
 
 // ======== GENERATE BILL ========
 
-// Route::get('generate-bill', 'Admin\OilRefillingController@edit');
+Route::get('generate-ltr-bill', 'Admin\generateLTRBILLController@generateLtrBill');
+
+Route::post('store-ltr-bill', 'Admin\generateLTRBILLController@storeLtrBill');
+
+Route::get('show-ltr-bill', 'Admin\generateLTRBILLController@show');
+
+Route::get('invoice-ltr-bill/{id}', 'Admin\generateLTRBILLController@invoiceLTR');
 
 
+Route::get('generate-bill', 'Admin\generateBILLController@generateBill');
 
 
+// UREA REFILLING  
+
+Route::get('urea-refilling-create', 'Admin\UreaRefillingController@create');
+
+Route::post('urea-refilling-store', 'Admin\UreaRefillingController@store');
+
+Route::get('urea-refilling-show', 'Admin\UreaRefillingController@show');
+
+Route::get('urea-refilling-edit/{id}', 'Admin\UreaRefillingController@edit');
+
+Route::post('urea-refilling-update/{id}', 'Admin\UreaRefillingController@update');
 
 
 

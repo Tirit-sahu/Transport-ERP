@@ -45,7 +45,7 @@ use Illuminate\Http\Request;
                                 <h3>
                                     Oil Refilling
 								</h3>
-								<a href="{{ url('/wheel-greasing-create') }}" class="btn btn-satgreen pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New </a>
+								<a href="{{ url('/oil-refilling-create') }}" class="btn btn-satgreen pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New </a>
                                 </div>
                                 <div class="box-content nopadding">
 									<x-alert />

@@ -61,7 +61,7 @@
 		<a href="{{route('company.edit',$company->id)}}" class="btn" rel="tooltip" title="Edit">
 			<i class="fa fa-edit"></i>
 		</a>
-		<a href="#" class="btn" rel="tooltip" title="Delete">
+		{{-- <a href="#" class="btn" rel="tooltip" title="Delete">
 		
 		<form action="{{route('company.destroy',$company->id)}}" method="post">
 			@csrf
@@ -70,7 +70,7 @@
 			<i class="fa bg-red fa-trash pr-1 pl-1 cursor" onclick="return confirm('Are you sure to Delete?')" style="cursor: pointer;color:red;"></i>
 			</button>
 		</form>
-		</a>
+		</a> --}}
 	</td>
 </tr>
 

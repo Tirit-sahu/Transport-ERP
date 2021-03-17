@@ -12,6 +12,7 @@ $missingExtensions = array();
 extension_loaded('dom') || $missingExtensions[] = 'dom';
 extension_loaded('fileinfo') || $missingExtensions[] = 'fileinfo';
 extension_loaded('filter') || $missingExtensions[] = 'filter';
+extension_loaded('gd') || $missingExtensions[] = 'gd';
 extension_loaded('json') || $missingExtensions[] = 'json';
 extension_loaded('libxml') || $missingExtensions[] = 'libxml';
 extension_loaded('mbstring') || $missingExtensions[] = 'mbstring';
@@ -20,6 +21,7 @@ extension_loaded('phar') || $missingExtensions[] = 'phar';
 extension_loaded('tokenizer') || $missingExtensions[] = 'tokenizer';
 extension_loaded('xml') || $missingExtensions[] = 'xml';
 extension_loaded('xmlwriter') || $missingExtensions[] = 'xmlwriter';
+extension_loaded('zlib') || $missingExtensions[] = 'zlib';
 
 if ($missingExtensions) {
     $issues[] = 'Your Composer dependencies require the following PHP extensions to be installed: ' . implode(', ', $missingExtensions);
