@@ -156,9 +156,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// EDIT DATA
+// GET SINGLE RECORD USING AJAX
 
-// Route::get('/editDataGet', 'Admin\commonController@EditData');
+Route::get('/editDataGet', 'Admin\commonController@EditData');
+
+
 
 Route::get('/pdf','Admin\TruckDocumentController@makePDF');
 
@@ -454,9 +456,14 @@ Route::get('urea-refilling-edit/{id}', 'Admin\UreaRefillingController@edit');
 Route::post('urea-refilling-update/{id}', 'Admin\UreaRefillingController@update');
 
 
+// Rack Handling Payment
+Route::get('rackHandlingPayment', 'Admin\RackHandlingController@rackHandlingPayment');
 
+Route::get('get-vehicle-with-gate-pass', 'Admin\RackHandlingController@getVehicleWithGatePass');
 
+Route::post('rackHandlingPaymentStore', 'Admin\RackHandlingController@rackHandlingPaymentStore');
 
+Route::get('rackHandlingPaymentShow', 'Admin\RackHandlingController@rackHandlingPaymentShow');
 
 
 // Stock Report

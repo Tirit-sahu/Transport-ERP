@@ -87,6 +87,45 @@ class RackHandlingController extends Controller
         return Redirect('/rackHandlingShow');
     }
 
+
+    public function rackHandlingPayment(Request $request)
+    {
+        return view('admin.rack_handling_payment');
+    }
+
+    public function getVehicleWithGatePass(commonController $cc)
+    {      
+        $collection=DB::table("rack_handlings")->where("is_payment", 0)->get();
+        $select_option='';
+        $select_option.="<option value=''>Select an Option</option>";
+        foreach ($collection as $row) {
+        $vehicle = $cc->getValueStatic("trucks","truck_number","id",$row->vehicle);
+        $select_option.="<option value='".$row->id."'>".$vehicle.' / '.$row->gate_pass_number."</option>";
+        }
+        return $select_option;
+    }
+
+
+    public function rackHandlingPaymentStore(Request $request)
+    {
+        $myArray = array(
+            'rack_handlings_id' => $request->vehicle,
+            'payment_date' => date('Y-m-d', strtotime($request->payment_date)),
+            'payment_amt' => $request->payment_amt
+        );
+
+        DB::table('rack_handling_payments')->insert($myArray);
+        $request->session()->flash('message', 'Payment Successfully');
+        return Redirect::back();
+
+    }
+
+    public function rackHandlingPaymentShow(Request $request)
+    {
+        $rack_handling_payments = DB::table('rack_handling_payments')->orderBy('id', 'DESC')->get();
+        return view('admin.report_rack_handling_payment', ['rack_handling_payments'=>$rack_handling_payments]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

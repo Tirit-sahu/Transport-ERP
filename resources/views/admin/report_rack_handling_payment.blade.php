@@ -36,9 +36,9 @@ use Illuminate\Http\Request;
                                 <div class="box box-color box-bordered">
                                 <div class="box-title">
                                 <h3>
-                                    Rack Handling Reports
+                                    Rack Handling Payment Reports
 								</h3>
-								<a href="{{ url('/rackHandling') }}" class="btn btn-satgreen pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Rack Handling</a>
+								<a href="{{ url('/rackHandlingPayment') }}" class="btn btn-satgreen pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Rack Handling Payment</a>
                                 </div>
                                 <div class="box-content nopadding">
 									<x-alert />
@@ -60,25 +60,29 @@ use Illuminate\Http\Request;
                                 </thead>
                                 <tbody>
 									@php $i=0; @endphp
-									@foreach($rack_handlings as $row)
+									@foreach($rack_handling_payments as $row)
+									<?php 
+										$vehicle = commonController::getValueStatic('rack_handlings','vehicle','id',$row->rack_handlings_id)
+									?>
                                 <tr>
                                 <td>{{ ++$i }}</td>      
 								<td>{{ $row->payment_date }}</td>                        
-                                <td >{{ commonController::getValueStatic('trucks','truck_number','id',$row->vehicle) }}</td>
-                                <td >{{ commonController::getValueStatic('truckowners','owner_name','id',$row->vehicle) }}</td>
-								<td >{{ commonController::getValueStatic('truckowners','mobile','id',$row->vehicle) }}</td>
-								<td>{{ $row->gate_pass_number }}</td>	
-                                <td >{{ $row->bag }}</td>   
-                                <td >{{ $row->rate }}</td>    
-                                <td >{{ $row->comm_amt }}</td>   
+                                <td >{{ commonController::getValueStatic('trucks','truck_number','id',$vehicle) }}</td>
+                                <td >{{ commonController::getValueStatic('truckowners','owner_name','id',$vehicle) }}</td>
+								<td >{{ commonController::getValueStatic('truckowners','mobile','id',$vehicle) }}</td>
+
+								<td>{{ commonController::getValueStatic('rack_handlings','gate_pass_number','id',$row->rack_handlings_id) }}</td>	
+                                <td >{{ commonController::getValueStatic('rack_handlings','bag','id',$row->rack_handlings_id) }}</td>   
+                                <td >{{ commonController::getValueStatic('rack_handlings','rate','id',$row->rack_handlings_id) }}</td>    
+                                <td >{{ commonController::getValueStatic('rack_handlings','comm_amt','id',$row->rack_handlings_id) }}</td>   
                                 							
                                 <td >{{ $row->payment_amt }}</td> 			
                                 <td>
                                
-                                <a href="{{ url('rackHandlingEdit/'.$row->id) }}" class="btn" rel="tooltip" title="Edit">
+                                {{-- <a href="{{ url('rackHandlingEdit/'.$row->id) }}" class="btn" rel="tooltip" title="Edit">
                                 <i class="fa fa-edit"></i>
-                                </a>
-                                <a onclick="return confirm('Are Your Sure ?')" href="{{ url('/COMMOMdestroy') }}?table=rack_handlings&key=id&value={{$row->id}}" class="btn" rel="tooltip" title="Delete">
+                                </a> --}}
+                                <a onclick="return confirm('Are Your Sure ?')" href="{{ url('/COMMOMdestroy') }}?table=rack_handling_payments&key=id&value={{$row->id}}" class="btn" rel="tooltip" title="Delete">
                                     <i class="fa fa-times"></i>
                                     </a>
                                 </td>
